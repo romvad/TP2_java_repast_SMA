@@ -1,3 +1,4 @@
 <context id="TP2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://repast.org/scenario/context">
   	<projection type="grid" id="grid"></projection>
+  	<projection id="Grass Field" type="value layer" />
 </context>

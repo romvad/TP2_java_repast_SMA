@@ -28,7 +28,7 @@ public class Animal extends Agent {
 	public void implement() {
 		move();
 		eat();
-		breed();
+		//breed();
 	}
 	
 	public void move(){
@@ -42,17 +42,17 @@ public class Animal extends Agent {
 		int width=grid.getDimensions().getWidth();
 		int height=grid.getDimensions().getHeight();
 		
-		if(width-abscisse==0){
+		if(abscisse==width-1){
 			horizontalMove=Math.random()>0.5? -1 : 0;
-		} else if (width-abscisse==width){
+		} else if (abscisse==0){
 			horizontalMove=Math.random()>0.5? 1 : 0;
 		}else{
 			horizontalMove=Math.random()>0.5? -1 : Math.random()>0.5? 0 : 1;
 		}
 		
-		if(height-ordonnee==0){
+		if(ordonnee==height-1){
 			ordonneeMove=Math.random()>0.5? -1 : 0;
-		}else if (height-ordonnee==height){
+		}else if (ordonnee==0){
 			ordonneeMove=Math.random()>0.5? 1 : 0;
 		}else{
 			ordonneeMove=Math.random()>0.5? -1 : Math.random()>0.5? 0 : 1;
@@ -60,8 +60,9 @@ public class Animal extends Agent {
 		
 		abscisse+=horizontalMove;
 		ordonnee+=ordonneeMove;
-		
+		if(horizontalMove!=0 || ordonneeMove!=0){//Case where the animal finally don't move, so he lost no energy
 		energy--;
+		}
 		
 		if(energy==0){
 			try {
@@ -76,7 +77,7 @@ public class Animal extends Agent {
 			if (this instanceof Sheep){
 				System.out.println("sheep bouge vers "+abscisse+","+ordonnee+" et a une energie de "+ energy);
 			} else {
-				System.out.println("sheep bouge vers "+abscisse+","+ordonnee+" et a une energie de "+ energy);
+				System.out.println("loup bouge vers "+abscisse+","+ordonnee+" et a une energie de "+ energy);
 			}
 		}
 

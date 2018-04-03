@@ -40,11 +40,13 @@ public class Sheep extends Animal{
 		
 		if(grassToEat!=null){
 			try {
-				System.out.println("mouton mange herbe à "+gpt.getX()+","+gpt.getY());
 				
-				if(grassToEat.isAlive())
+				
+				if(grassToEat.isAlive()){
 					grassToEat.die();
-				energy+=gain;
+					energy+=gain;
+					System.out.println("mouton mange herbe à "+gpt.getX()+","+gpt.getY());
+				}
 			} catch (KillOfAnAlreadyDeadAgent e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -17,7 +17,7 @@ public abstract class Agent {
 		this.alive=true;
 	}
 	
-	@ScheduledMethod(start = 1, interval = 1, shuffle=true)
+	@ScheduledMethod(start = 2, interval = 1, shuffle=true)
 	public void implement(){
 		//Overrided by subclasses
 	}

@@ -6,22 +6,36 @@ import repast.simphony.parameter.Parameters;
 import repast.simphony.space.grid.Grid;
 import repast.simphony.space.grid.GridPoint;
 import repast.simphony.util.ContextUtils;
+import repast.simphony.valueLayer.GridValueLayer;
 
 public class Grass extends Agent {
 
 	protected int remainingTimeToRevive;
 	private static int REVIVE_DURATION;
-	public Grass (Grid<Agent>grid, boolean alive){
+	
+	GridValueLayer vl;
+	
+	private static final int ALIVE = 1;
+	private static final int DEAD = 0;
+	
+	public Grass (Context context, Grid<Agent>grid, boolean alive, int abscisse, int ordonnee){
 		super(grid);
 		this.alive=alive;
 		
 			// Get the duration of grass revival from the user parameters
 			Parameters p = RunEnvironment.getInstance().getParameters();
 			REVIVE_DURATION=(int)p.getValue("grassReviveDuration");
+			
+			//context=ContextUtils.getContext(this);
+			context.add(this);
+			grid.moveTo(this, abscisse, ordonnee);
+			vl = (GridValueLayer)context.getValueLayer("Grass Field");
 			if(!alive){
 				remainingTimeToRevive=REVIVE_DURATION;
+				vl.set(DEAD, grid.getLocation(this).toIntArray(null));
 			}else{
 				remainingTimeToRevive=0;
+				vl.set(ALIVE, grid.getLocation(this).toIntArray(null));
 			}
 	}
 	
@@ -61,8 +75,8 @@ public class Grass extends Agent {
 		setAlive(false);
 		setRemainingTimeToRevive(REVIVE_DURATION);
 		
-		
-		context.remove(this);
+		vl.set(DEAD, grid.getLocation(this).toIntArray(null));
+		//context.remove(this);
 		
 		
 	}
@@ -75,7 +89,8 @@ public class Grass extends Agent {
 		GridPoint gpt=grid.getLocation(this);
 		Context<Object> context=ContextUtils.getContext(this);
 		System.out.println("herbe  revit à "+gpt.getX()+","+gpt.getY());
-		context.add(this);
+		//context.add(this);
+		vl.set(ALIVE, grid.getLocation(this).toIntArray(null));
 		
 		
 	}
