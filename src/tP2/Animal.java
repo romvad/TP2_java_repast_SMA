@@ -28,7 +28,7 @@ public class Animal extends Agent {
 	public void implement() {
 		move();
 		eat();
-		//breed();
+		breed();
 	}
 	
 	public void move(){

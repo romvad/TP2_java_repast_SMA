@@ -3,6 +3,7 @@ package tP2;
 import repast.simphony.context.Context;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.parameter.Parameters;
+import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.grid.Grid;
 import repast.simphony.space.grid.GridPoint;
 import repast.simphony.util.ContextUtils;
@@ -28,7 +29,9 @@ public class Grass extends Agent {
 			
 			//context=ContextUtils.getContext(this);
 			context.add(this);
+			ContinuousSpace space = (ContinuousSpace)context.getProjection("Continuous Space");
 			grid.moveTo(this, abscisse, ordonnee);
+			space.moveTo(this, abscisse,ordonnee,0);
 			vl = (GridValueLayer)context.getValueLayer("Grass Field");
 			if(!alive){
 				remainingTimeToRevive=REVIVE_DURATION;
